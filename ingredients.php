@@ -14,8 +14,8 @@ include "db/connection.php";
 </head>
 
 <body>
+    <?php include "sidebar.php"; ?>
     <div class="container">
-        <?php include "sidebar.php"; ?>
         <!-- partial -->
         <div class="ingredients-panel">
             <div class="content-wrapper">

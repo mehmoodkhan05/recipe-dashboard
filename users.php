@@ -66,11 +66,11 @@ if (isset($_POST['user_id'])) {
                                                     <td><?php echo $row["phoneNumber"] ?></td>
                                                     <td><?php echo $row["name"] ?></td>
                                                     <td>
-                                                        <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal" data-target="#userModal" class="text-primary view-user">
-                                                            <i class="fa-solid fa-eye me-5"></i>
+                                                        <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal" data-target="#userModal" class="view-user">
+                                                            <i class="fa-solid fa-eye me-2"></i>
                                                         </a>
                                                         <a href="edit.php?user_id=<?php echo $row["user_id"] ?>" class="text-success">
-                                                            <i class="fa-solid fa-pen-to-square me-3"></i>
+                                                            <i class="fa-solid fa-pen-to-square me-2"></i>
                                                         </a>
                                                         <a href="delete.php?user_id=<?php echo $row["user_id"] ?>" class="text-danger">
                                                             <i class="fa-solid fa-trash"></i>
@@ -97,6 +97,7 @@ if (isset($_POST['user_id'])) {
             <div class="modal-content">
                 <div class="modal-header text-center">
                     <h5 class="modal-title text-center" id="userModalLabel">User Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="user_img text-center mb-4">
@@ -164,7 +165,7 @@ if (isset($_POST['user_id'])) {
                 </div>
                 <div class="modal-footer">
                     <a href="#" class="btn btn-primary">Allergies</a>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

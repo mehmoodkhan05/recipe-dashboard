@@ -82,71 +82,71 @@ if (isset($_POST["submit"])) {
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Email</label>
                                         <input readonly type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>">
+                                        <label for="floatingName">Email</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingdob">Phone</label>
                                         <input readonly type="text" class="form-control" name="phoneNumber" value="<?php echo $row['phoneNumber'] ?>">
+                                        <label for="floatingdob">Phone</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">location Latitude</label>
                                         <input type="text" class="form-control" name="locationLatitude" value="<?php echo $row['locationLatitude'] ?>">
+                                        <label for="floatingName">location Latitude</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">location Longitude</label>
                                         <input type="text" class="form-control" name="locationLongitude" value="<?php echo $row['locationLongitude'] ?>">
+                                        <label for="floatingName">location Longitude</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Name</label>
                                         <input type="text" class="form-control" name="name" value="<?php echo $row['name']; ?>">
+                                        <label for="floatingName">Name</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Type</label>
                                         <input type="text" class="form-control" name="type" value="<?php echo $row['type']; ?>">
+                                        <label for="floatingName">Type</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Token</label>
                                         <input type="text" class="form-control" name="token" value="<?php echo $row['token']; ?>">
+                                        <label for="floatingName">Token</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Description</label>
                                         <input type="text" class="form-control" name="description" value="<?php echo $row['description']; ?>">
+                                        <label for="floatingName">Description</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingName">Coins</label>
                                         <input type="text" class="form-control" name="coins" value="<?php echo $row['coins']; ?>">
+                                        <label for="floatingName">Coins</label>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4">
                                     <div class="form-floating mb-3">
-                                        <label for="floatingPassword">Password</label>
                                         <input type="password" class="form-control" name="password" value="">
+                                        <label for="floatingPassword">Password</label>
                                     </div>
                                 </div>
                             </div>

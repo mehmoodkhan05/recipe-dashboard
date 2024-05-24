@@ -40,15 +40,15 @@ if (isset($_POST["submit"])) {
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="form-floating mb-3">
-                                <label for="floatingName">Ingredient Name</label>
                                 <input type="text" class="form-control" name="ingredient_name" id="floatingName" required>
+                                <label for="floatingName">Ingredient Name</label>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
                             <div class="form-floating mb-3">
-                                <label for="floatingName">Pref Unit</label>
                                 <input type="text" class="form-control" name="pref_unit" id="floatingUnit" required>
+                                <label for="floatingName">Pref Unit</label>
                             </div>
                         </div>
                     </div>
