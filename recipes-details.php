@@ -160,9 +160,9 @@ curl_close($ch);
                                             <tr>
                                                 <th>Quantity</th>
                                                 <th>Unit</th>
-                                                <th>Extra</th>
+                                                <!-- <th>Extra</th> -->
                                                 <th>Name</th>
-                                                <th>Icon URL</th>
+                                                <!-- <th>Icon URL</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -172,10 +172,10 @@ curl_close($ch);
                                                     </td>
                                                     <td><?php echo htmlspecialchars($ingredient['ingredient_unit']); ?>
                                                     </td>
-                                                    <td><?php echo htmlspecialchars($ingredient['extra']); ?></td>
+                                                    <!-- <td><?php // echo htmlspecialchars($ingredient['extra']); ?></td> -->
                                                     <td><?php echo htmlspecialchars($ingredient['ingredient_name']); ?>
                                                     </td>
-                                                    <td><?php echo htmlspecialchars($ingredient['icon_url']); ?></td>
+                                                    <!-- <td><?php // echo htmlspecialchars($ingredient['icon_url']); ?></td> -->
                                                 </tr>
                                             <?php endforeach; ?>
                                         </tbody>
@@ -193,18 +193,18 @@ curl_close($ch);
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>id</th>
-                                                <th>Recipe id</th>
-                                                <th>Number</th>
+                                                <!-- <th>id</th> -->
+                                                <!-- <th>Recipe id</th> -->
+                                                <!-- <th>Number</th> -->
                                                 <th>Body</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php foreach ($steps as $step): ?>
                                                 <tr>
-                                                    <td><?php echo htmlspecialchars($step['step_id']); ?></td>
-                                                    <td><?php echo htmlspecialchars($step['recipe_id']); ?></td>
-                                                    <td><?php echo htmlspecialchars($step['step_number']); ?></td>
+                                                    <!-- <td><?php // echo htmlspecialchars($step['step_id']); ?></td> -->
+                                                    <!-- <td><?php // echo htmlspecialchars($step['recipe_id']); ?></td> -->
+                                                    <!-- <td><?php // echo htmlspecialchars($step['step_number']); ?></td> -->
                                                     <td><?php echo htmlspecialchars($step['step_body']); ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
@@ -227,11 +227,11 @@ curl_close($ch);
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th>id</th>
-                                                <th>User id</th>
-                                                <th>Recipe id</th>
+                                                <!-- <th>id</th> -->
+                                                <!-- <th>User id</th> -->
+                                                <!-- <th>Recipe id</th> -->
                                                 <th>Body</th>
-                                                <th>Time Stamp</th>
+                                                <!-- <th>Time Stamp</th> -->
                                                 <th>Username</th>
                                                 <th>Like Count</th>
                                                 <th>Likes</th>
@@ -242,11 +242,11 @@ curl_close($ch);
                                             <?php if (!empty($comments)): ?>
                                                 <?php foreach ($comments as $comment): ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($comments['id']); ?></td>
-                                                        <td><?php echo htmlspecialchars($comments['user_id']); ?></td>
-                                                        <td><?php echo htmlspecialchars($comments['recipe_id']); ?></td>
+                                                        <!-- <td><?php // echo htmlspecialchars($comments['id']); ?></td> -->
+                                                        <!-- <td><?php // echo htmlspecialchars($comments['user_id']); ?></td> -->
+                                                        <!-- <td><?php // echo htmlspecialchars($comments['recipe_id']); ?></td> -->
                                                         <td><?php echo htmlspecialchars($comments['comment_body']); ?></td>
-                                                        <td><?php echo htmlspecialchars($comments['timestamp']); ?></td>
+                                                        <!-- <td><?php // echo htmlspecialchars($comments['timestamp']); ?></td> -->
                                                         <td><?php echo htmlspecialchars($comments['user_name']); ?></td>
                                                         <td><?php echo htmlspecialchars($comments['like_count']); ?></td>
                                                         <td><?php echo htmlspecialchars($comments['likes']); ?></td>
@@ -288,12 +288,12 @@ curl_close($ch);
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th>id</th>
-                                                <th>Recipe id</th>
-                                                <th>User id</th>
+                                                <!-- <th>id</th> -->
+                                                <!-- <th>Recipe id</th> -->
+                                                <!-- <th>User id</th> -->
                                                 <th>Stars</th>
                                                 <th>Comments</th>
-                                                <th>Time Stamp</th>
+                                                <!-- <th>Time Stamp</th> -->
                                                 <th>Username</th>
                                             </tr>
                                         </thead>
@@ -301,12 +301,12 @@ curl_close($ch);
                                             <?php if (!empty($reviews)): ?>
                                                 <?php foreach ($reviews as $review): ?>
                                                     <tr>
-                                                        <td><?php echo htmlspecialchars($reviews['review_id']); ?></td>
-                                                        <td><?php echo htmlspecialchars($reviews['recipe_id']); ?></td>
-                                                        <td><?php echo htmlspecialchars($reviews['user_id']); ?></td>
+                                                        <!-- <td><?php // echo htmlspecialchars($reviews['review_id']); ?></td> -->
+                                                        <!-- <td><?php // echo htmlspecialchars($reviews['recipe_id']); ?></td> -->
+                                                        <!-- <td><?php // echo htmlspecialchars($reviews['user_id']); ?></td> -->
                                                         <td><?php echo htmlspecialchars($reviews['no_of_stars']); ?></td>
                                                         <td><?php echo htmlspecialchars($reviews['comment']); ?></td>
-                                                        <td><?php echo htmlspecialchars($reviews['timestamp']); ?></td>
+                                                        <!-- <td><?php // echo htmlspecialchars($reviews['timestamp']); ?></td> -->
                                                         <td><?php echo htmlspecialchars($reviews['user_name']); ?></td>
                                                     </tr>
                                                 <?php endforeach; ?>
