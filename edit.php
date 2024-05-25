@@ -19,31 +19,76 @@ if (isset($_POST["submit"])) {
     // Update user data in the MySQL database
     if (!empty($password)) {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "UPDATE `users` SET `email`='$email',
-        `phoneNumber`='$phoneNumber',
-        `locationLatitude`='$locationLatitude',
-        `locationLongitude`='$locationLongitude',
-        `name`='$name',
-        `type`='$type',
-        `token`='$token',
-        `description`='$description',
-        `coins`='$coins',
-        `password`='$hashedPassword'
-        WHERE user_id = $id";
+        $sql = "UPDATE `users` SET 
+            `email`='$email',
+            `phoneNumber`='$phoneNumber',
+            `locationLatitude`='$locationLatitude',
+            `locationLongitude`='$locationLongitude',
+            `name`='$name',
+            `type`='$type',
+            `token`='$token',
+            `description`='$description',
+            `coins`='$coins',
+            `password`='$hashedPassword'
+            WHERE user_id = $id";
     } else {
-        $sql = "UPDATE `users` SET `email`='$email',
-        `phoneNumber`='$phoneNumber',
-        `locationLatitude`='$locationLatitude',
-        `locationLongitude`='$locationLongitude',
-        `name`='$name',
-        `type`='$type',
-        `token`='$token',
-        `description`='$description',
-        `coins`='$coins'
-        WHERE user_id = $id";
+        $sql = "UPDATE `users` SET 
+            `email`='$email',
+            `phoneNumber`='$phoneNumber',
+            `locationLatitude`='$locationLatitude',
+            `locationLongitude`='$locationLongitude',
+            `name`='$name',
+            `type`='$type',
+            `token`='$token',
+            `description`='$description',
+            `coins`='$coins'
+            WHERE user_id = $id";
     }
 
     $result = mysqli_query($conn, $sql);
+
+    // Handle profile image upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $imageTmpPath = $_FILES['image']['tmp_name'];
+        $imageName = $_FILES['image']['name'];
+        $imageSize = $_FILES['image']['size'];
+        $imageType = $_FILES['image']['type'];
+        $imageExt = pathinfo($imageName, PATHINFO_EXTENSION);
+        $allowedExts = ['jpg', 'jpeg', 'png', 'gif'];
+
+        if (in_array($imageExt, $allowedExts)) {
+            $uploadDir = 'assets/img/users/';
+            $imagePath = $uploadDir . basename($imageName);
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
+            }
+
+            // Check if user has an existing image
+            $sql_existing_image = "SELECT image FROM `users` WHERE user_id = $id";
+            $result_existing_image = mysqli_query($conn, $sql_existing_image);
+            if ($result_existing_image && mysqli_num_rows($result_existing_image) > 0) {
+                $row = mysqli_fetch_assoc($result_existing_image);
+                $existingImage = $row['image'];
+                // Delete the old image file
+                if (file_exists($existingImage)) {
+                    unlink($existingImage);
+                }
+            }
+
+            if (move_uploaded_file($imageTmpPath, $imagePath)) {
+                // Update the profile image path in the database
+                $sql_update_image = "UPDATE `users` SET `image`='$imagePath' WHERE user_id = $id";
+                $result_update_image = mysqli_query($conn, $sql_update_image);
+                if (!$result_update_image) {
+                    echo "Failed to update profile image: " . mysqli_error($conn);
+                }
+            } else {
+                echo "Error uploading the file.";
+            }
+        } else {
+            echo "Invalid file extension.";
+        }
+    }
 
     if ($result) {
         header("Location: users.php");
@@ -65,8 +110,8 @@ if (isset($_POST["submit"])) {
     <?php include "sidebar.php" ?>
     <div class="container page-body-wrapper">
         <!-- partial -->
-        <div class="row justify-content-end">
-            <div class="col-10">
+        <div class="row justify-content-lg-end justify-content-center">
+            <div class="col-lg-10">
                 <div class="main-panel">
                     <div class="content-wrapper">
                         <div class="text-center mb-4">
@@ -78,75 +123,91 @@ if (isset($_POST["submit"])) {
                         $result = mysqli_query($conn, $sql);
                         $row = mysqli_fetch_assoc($result);
                         ?>
-                        <form action="" method="POST">
+                        <form action="" method="POST" enctype="multipart/form-data">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input readonly type="text" class="form-control" name="email" value="<?php echo $row['email'] ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Email</label>
+                                        <input readonly type="text" class="form-control" name="email"
+                                            value="<?php echo $row['email'] ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input readonly type="text" class="form-control" name="phoneNumber" value="<?php echo $row['phoneNumber'] ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingdob">Phone</label>
+                                        <input readonly type="text" class="form-control" name="phoneNumber"
+                                            value="<?php echo $row['phoneNumber'] ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="locationLatitude" value="<?php echo $row['locationLatitude'] ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">location Latitude</label>
+                                        <input type="text" class="form-control" name="locationLatitude"
+                                            value="<?php echo $row['locationLatitude'] ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="locationLongitude" value="<?php echo $row['locationLongitude'] ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">location Longitude</label>
+                                        <input type="text" class="form-control" name="locationLongitude"
+                                            value="<?php echo $row['locationLongitude'] ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="name" value="<?php echo $row['name']; ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Name</label>
+                                        <input type="text" class="form-control" name="name"
+                                            value="<?php echo $row['name']; ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="type" value="<?php echo $row['type']; ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Type</label>
+                                        <input type="text" class="form-control" name="type"
+                                            value="<?php echo $row['type']; ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="token" value="<?php echo $row['token']; ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Token</label>
+                                        <input type="text" class="form-control" name="token"
+                                            value="<?php echo $row['token']; ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="description" value="<?php echo $row['description']; ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Description</label>
+                                        <input type="text" class="form-control" name="description"
+                                            value="<?php echo $row['description']; ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" name="coins" value="<?php echo $row['coins']; ?>">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
                                         <label for="floatingName">Coins</label>
+                                        <input type="text" class="form-control" name="coins"
+                                            value="<?php echo $row['coins']; ?>">
                                     </div>
                                 </div>
 
-                                <div class="col-lg-4">
-                                    <div class="form-floating mb-3">
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="floatingPassword">Update Password</label>
                                         <input type="password" class="form-control" name="password" value="">
-                                        <label for="floatingPassword">Password</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-sm-6 col-12">
+                                    <div class="mb-3">
+                                        <label for="floatingProfile">Update Profile</label>
+                                        <input type="file" class="form-control" name="image" value="">
                                     </div>
                                 </div>
                             </div>

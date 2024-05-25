@@ -63,8 +63,8 @@ curl_close($ch);
   <div class="container">
     <div class="recipes-page">
       <h2 class="text-center">Recipes</h2>
-      <div class="row justify-content-end">
-        <div class="col-lg-10 col-12">
+      <div class="row justify-content-lg-end justify-content-center">
+        <div class="col-lg-10">
           <div class="card mt-5">
             <div class="card-body">
               <div class="table-responsive">
@@ -120,7 +120,7 @@ curl_close($ch);
                           <td><?php echo substr($dateAndTime, 0, 10) ?></td>
                           <!-- <td><img src="<?php // echo htmlspecialchars($recipe['picture_url']); ?>" class="img-fluid" width></td> -->
                           <td>
-                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>" class="text-decoration-none">
+                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>" class="text-decoration-none" title="view">
                               <i class="fa-solid fa-eye me-5"></i>
                             </a>
                           </td>

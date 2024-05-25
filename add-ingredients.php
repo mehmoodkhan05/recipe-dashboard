@@ -39,16 +39,17 @@ if (isset($_POST["submit"])) {
                 <form action="" method="POST">
                     <div class="row">
                         <div class="col-lg-4">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="ingredient_name" id="floatingName" required>
+                            <div class="mb-3">
                                 <label for="floatingName">Ingredient Name</label>
+                                <input type="text" class="form-control" name="ingredient_name" id="floatingName"
+                                    required>
                             </div>
                         </div>
 
                         <div class="col-lg-4">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="pref_unit" id="floatingUnit" required>
+                            <div class="mb-3">
                                 <label for="floatingName">Pref Unit</label>
+                                <input type="text" class="form-control" name="pref_unit" id="floatingUnit" required>
                             </div>
                         </div>
                     </div>

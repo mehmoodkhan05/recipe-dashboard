@@ -32,9 +32,9 @@ if (isset($_POST['user_id'])) {
 <body>
     <div class="container">
         <div class="main-panel">
-        <h2 class="text-center">Users</h2>
-            <div class="row justify-content-end">
-                <div class="col-10">
+            <h2 class="text-center">Users</h2>
+            <div class="row justify-content-lg-end justify-content-center">
+                <div class="col-lg-10">
                     <div class="add_user-btn justify-content-end d-flex mb-3">
                         <a href="add-user.php" class="btn btn-primary">Add User</a>
                     </div>
@@ -64,29 +64,27 @@ if (isset($_POST['user_id'])) {
                                                 <td><?php echo $row["name"] ?></td>
                                                 <td>
                                                     <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal"
-                                                        data-target="#userModal" class="view-user text-decoration-none">
+                                                        data-target="#userModal" class="view-user text-decoration-none"
+                                                        title="view">
                                                         <i class="fa-solid fa-eye me-2"></i>
                                                     </a>
                                                     <a href="edit.php?user_id=<?php echo $row["user_id"] ?>"
-                                                        class="text-success text-decoration-none">
+                                                        class="text-success text-decoration-none" title="edit">
                                                         <i class="fa-solid fa-pen-to-square me-2"></i>
                                                     </a>
                                                     <a href="delete.php?user_id=<?php echo $row["user_id"] ?>"
-                                                        class="text-danger text-decoration-none">
-                                                        <i class="fa-solid fa-trash me-2"></i>
+                                                        class="text-danger text-decoration-none" title="delete">
+                                                        <i class="fa-solid fa-trash me-1"></i>
                                                     </a>
-                                                    <!-- <a href="?user_id=<?php // echo $row["user_id"] ?>"
-                                                        class="text-decoration-none" title="Recipes">
-                                                        <i class="fa-solid fa-eye me-2"></i>
-                                                    </a>
-                                                    <a href="?user_id=<?php // echo $row["user_id"] ?>"
+                                                    <a href="user-allergies.php?user_id=<?php echo $row["user_id"] ?>"
                                                         class="text-decoration-none" title="Allergies">
-                                                        <i class="fa-solid fa-eye me-2"></i>
+                                                        <i class="fas fa-allergies"></i>
                                                     </a>
-                                                    <a href="?user_id=<?php // echo $row["user_id"] ?>"
+                                                    <a href="user-dietary-restriction.php?user_id=<?php echo $row["user_id"] ?>"
                                                         class="text-decoration-none" title="Dietary Restriction">
-                                                        <i class="fa-solid fa-eye "></i>
-                                                    </a> -->
+                                                        Dietary Restriction
+                                                        <!-- <i class="fas fa-allergies"></i> -->
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <?php
@@ -112,7 +110,7 @@ if (isset($_POST['user_id'])) {
                 </div>
                 <div class="modal-body">
                     <div class="user_img text-center mb-4">
-                        <img src="assets/img/user.png" alt="" class="img-fluid rounded-circle">
+                        <img src="assets/img/user.png" alt="" class="img-fluid rounded-circle" id="modalImage">
                         <!-- <img src="" alt="" class="img-fluid rounded-circle"> -->
                     </div>
                     <form action="" method="">
@@ -174,10 +172,10 @@ if (isset($_POST['user_id'])) {
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
                     <a href="#" class="btn btn-primary">Allergies</a>
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -210,6 +208,8 @@ if (isset($_POST['user_id'])) {
                                 document.getElementById('modalToken').value = user.token || '';
                                 document.getElementById('modalDescriptions').value = user.description || '';
                                 document.getElementById('modalCoins').value = user.coins || '';
+
+                                // Set the src attribute of the image tag to the user's image URL
                                 document.getElementById('modalImage').src = user.image || 'assets/img/user.png';
                             } else {
                                 alert('User not found');
