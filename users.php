@@ -1,6 +1,7 @@
 <?php
 include "navbar.php";
 include "db/connection.php";
+include "sidebar.php";
 
 if (isset($_POST['user_id'])) {
     $id = $_POST['user_id'];
@@ -29,70 +30,66 @@ if (isset($_POST['user_id'])) {
 </head>
 
 <body>
-    <!-- partial -->
-    <?php include "sidebar.php"; ?>
-    <div class="container page-body-wrapper">
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-                <h2 class="text-center">Users</h2>
-                <div class="row justify-content-end">
-                    <div class="col-10 grid-margin stretch-card">
-                        <div class="add_user-btn justify-content-end d-flex mb-3">
-                            <a href="add-user.php" class="btn btn-primary">Add User</a>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>email</th>
-                                                <th>phone</th>
-                                                <th>name</th>
-                                                <th>Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $sql = "SELECT * FROM `users`";
-                                            $result = mysqli_query($conn, $sql);
-                                            while ($row = mysqli_fetch_assoc($result)) {
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $row["user_id"] ?></td>
-                                                    <td><?php echo $row["email"] ?></td>
-                                                    <td><?php echo $row["phoneNumber"] ?></td>
-                                                    <td><?php echo $row["name"] ?></td>
-                                                    <td>
-                                                        <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal" data-target="#userModal" class="view-user text-decoration-none">
-                                                            <i class="fa-solid fa-eye me-2"></i>
-                                                        </a>
-                                                        <a href="edit.php?user_id=<?php echo $row["user_id"] ?>" class="text-success text-decoration-none">
-                                                            <i class="fa-solid fa-pen-to-square me-2"></i>
-                                                        </a>
-                                                        <a href="delete.php?user_id=<?php echo $row["user_id"] ?>" class="text-danger text-decoration-none">
-                                                            <i class="fa-solid fa-trash"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php
-                                            }
-                                            ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+    <div class="container">
+        <h2 class="text-center">Users</h2>
+        <div class="row justify-content-end">
+            <div class="col-10">
+                <div class="add_user-btn justify-content-end d-flex mb-3">
+                    <a href="add-user.php" class="btn btn-primary">Add User</a>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>email</th>
+                                        <th>phone</th>
+                                        <th>name</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $sql = "SELECT * FROM `users`";
+                                    $result = mysqli_query($conn, $sql);
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $row["user_id"] ?></td>
+                                            <td><?php echo $row["email"] ?></td>
+                                            <td><?php echo $row["phoneNumber"] ?></td>
+                                            <td><?php echo $row["name"] ?></td>
+                                            <td>
+                                                <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal"
+                                                    data-target="#userModal" class="view-user text-decoration-none">
+                                                    <i class="fa-solid fa-eye me-2"></i>
+                                                </a>
+                                                <a href="edit.php?user_id=<?php echo $row["user_id"] ?>"
+                                                    class="text-success text-decoration-none">
+                                                    <i class="fa-solid fa-pen-to-square me-2"></i>
+                                                </a>
+                                                <a href="delete.php?user_id=<?php echo $row["user_id"] ?>"
+                                                    class="text-danger text-decoration-none">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- content-wrapper ends -->
     </div>
 
-    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center">
@@ -172,9 +169,9 @@ if (isset($_POST['user_id'])) {
     </div>
     <?php include "footer.php" ?>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.view-user').forEach(function(element) {
-                element.addEventListener('click', function(event) {
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.view-user').forEach(function (element) {
+                element.addEventListener('click', function (event) {
                     event.preventDefault();
                     var userId = this.getAttribute('data-id');
 
@@ -182,7 +179,7 @@ if (isset($_POST['user_id'])) {
                     var xhr = new XMLHttpRequest();
                     xhr.open('POST', 'get-users.php', true);
                     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onreadystatechange = function() {
+                    xhr.onreadystatechange = function () {
                         if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                             var user = JSON.parse(xhr.responseText);
 
