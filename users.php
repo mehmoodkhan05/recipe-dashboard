@@ -66,13 +66,13 @@ if (isset($_POST['user_id'])) {
                                                     <td><?php echo $row["phoneNumber"] ?></td>
                                                     <td><?php echo $row["name"] ?></td>
                                                     <td>
-                                                        <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal" data-target="#userModal" class="view-user">
+                                                        <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal" data-target="#userModal" class="view-user text-decoration-none">
                                                             <i class="fa-solid fa-eye me-2"></i>
                                                         </a>
-                                                        <a href="edit.php?user_id=<?php echo $row["user_id"] ?>" class="text-success">
+                                                        <a href="edit.php?user_id=<?php echo $row["user_id"] ?>" class="text-success text-decoration-none">
                                                             <i class="fa-solid fa-pen-to-square me-2"></i>
                                                         </a>
-                                                        <a href="delete.php?user_id=<?php echo $row["user_id"] ?>" class="text-danger">
+                                                        <a href="delete.php?user_id=<?php echo $row["user_id"] ?>" class="text-danger text-decoration-none">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </a>
                                                     </td>

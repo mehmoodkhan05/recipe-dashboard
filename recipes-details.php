@@ -50,7 +50,6 @@ if (curl_errno($ch)) {
 // Close the cURL session
 curl_close($ch);
 ?>
-?>
 
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -66,15 +65,13 @@ curl_close($ch);
     </style>
 </head>
 
-
-
 <body>
     <div class="container">
         <div class="recipes_details-page">
             <h2 class="text-center mb-4">Recipes Details</h2>
             <div class="recipe_img-view">
-                <div class="row justify-content-end">
-                    <div class="col-5 align-items-center d-flex">
+                <div class="row justify-content-lg-end justify-content-center">
+                    <div class="col-lg-5 col-10 align-items-center d-flex mb-3 mb-lg-0">
                         <?php if (!empty($picture_urls)): ?>
                             <div id="recipeImageCarousel" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
@@ -100,7 +97,8 @@ curl_close($ch);
                             <img src="" class="img-fluid" alt="No image available">
                         <?php endif; ?>
                     </div>
-                    <div class="col-5 details_colomn">
+
+                    <div class="col-lg-5 col-10 details_colomn">
                         <div class="row">
                             <div class="col-6">
                                 <p>Total Time: <?php echo htmlspecialchars($recipes['total_time']); ?></p>
@@ -115,7 +113,7 @@ curl_close($ch);
                                 <p>Serving Size: <?php echo htmlspecialchars($recipes['serving_size']); ?></p>
                             </div>
                             <div class="col-12">
-                                <p>Source Link: <?php echo htmlspecialchars($recipes['source_link']); ?></p>
+                                <p class="text-break">Source Link: <?php echo htmlspecialchars($recipes['source_link']); ?></p>
                             </div>
                             <div class="col-6">
                                 <p>City: <?php echo htmlspecialchars($recipes['city']); ?></p>
@@ -149,8 +147,8 @@ curl_close($ch);
             </div>
 
             <div class="ingredients_steps-view">
-                <div class="row justify-content-end">
-                    <div class="col-5">
+                <div class="row justify-content-lg-end justify-content-center">
+                    <div class="col-lg-5 col-10">
                         <div class="card mt-5">
                             <h5 class="text-center mt-2">Ingredients</h5>
                             <div class="card-body">
@@ -185,7 +183,7 @@ curl_close($ch);
                         </div>
                     </div>
 
-                    <div class="col-5">
+                    <div class="col-lg-5 col-10">
                         <div class="card mt-5">
                             <div class="card-body">
                                 <h5 class="text-center mt-2">Steps</h5>
@@ -218,8 +216,8 @@ curl_close($ch);
             </div>
 
             <div class="comments_reviews-view">
-                <div class="row justify-content-end">
-                    <div class="col-5">
+                <div class="row justify-content-lg-end justify-content-center">
+                    <div class="col-lg-5 col-10">
                         <div class="card mt-5">
                             <h5 class="text-center mt-2">Comments</h5>
                             <div class="card-body">
@@ -280,7 +278,7 @@ curl_close($ch);
                         </div>
                     </div>
 
-                    <div class="col-5">
+                    <div class="col-lg-5 col-10">
                         <div class="card mt-5">
                             <div class="card-body">
                                 <h5 class="text-center mt-2">Reviews</h5>
