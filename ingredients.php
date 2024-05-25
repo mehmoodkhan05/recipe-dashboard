@@ -4,8 +4,6 @@ include "db/connection.php";
 ?>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css">
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.0.7/js/dataTables.min.js"></script>
     <style>
         .ingredients-panel {
             margin-top: 100px;
@@ -48,10 +46,10 @@ include "db/connection.php";
                                                     <td><?php echo $row["ingredient_name"] ?></td>
                                                     <td><?php echo $row["pref_unit"] ?></td>
                                                     <td>
-                                                        <a href="edit-ingredients.php?ingredient_id=<?php echo $row["ingredient_id"] ?>" class="text-success">
+                                                        <a href="edit-ingredients.php?ingredient_id=<?php echo $row["ingredient_id"] ?>" class="text-success text-decoration-none">
                                                             <i class="fa-solid fa-pen-to-square me-3"></i>
                                                         </a>
-                                                        <a href="delete-ingredients.php?ingredient_id=<?php echo $row["ingredient_id"] ?>" class="text-danger">
+                                                        <a href="delete-ingredients.php?ingredient_id=<?php echo $row["ingredient_id"] ?>" class="text-danger text-decoration-none">
                                                             <i class="fa-solid fa-trash"></i>
                                                         </a>
                                                     </td>

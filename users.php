@@ -31,56 +31,70 @@ if (isset($_POST['user_id'])) {
 
 <body>
     <div class="container">
+        <div class="main-panel">
         <h2 class="text-center">Users</h2>
-        <div class="row justify-content-end">
-            <div class="col-10">
-                <div class="add_user-btn justify-content-end d-flex mb-3">
-                    <a href="add-user.php" class="btn btn-primary">Add User</a>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>id</th>
-                                        <th>email</th>
-                                        <th>phone</th>
-                                        <th>name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $sql = "SELECT * FROM `users`";
-                                    $result = mysqli_query($conn, $sql);
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        ?>
+            <div class="row justify-content-end">
+                <div class="col-10">
+                    <div class="add_user-btn justify-content-end d-flex mb-3">
+                        <a href="add-user.php" class="btn btn-primary">Add User</a>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
                                         <tr>
-                                            <td><?php echo $row["user_id"] ?></td>
-                                            <td><?php echo $row["email"] ?></td>
-                                            <td><?php echo $row["phoneNumber"] ?></td>
-                                            <td><?php echo $row["name"] ?></td>
-                                            <td>
-                                                <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal"
-                                                    data-target="#userModal" class="view-user text-decoration-none">
-                                                    <i class="fa-solid fa-eye me-2"></i>
-                                                </a>
-                                                <a href="edit.php?user_id=<?php echo $row["user_id"] ?>"
-                                                    class="text-success text-decoration-none">
-                                                    <i class="fa-solid fa-pen-to-square me-2"></i>
-                                                </a>
-                                                <a href="delete.php?user_id=<?php echo $row["user_id"] ?>"
-                                                    class="text-danger text-decoration-none">
-                                                    <i class="fa-solid fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <th>id</th>
+                                            <th>email</th>
+                                            <th>phone</th>
+                                            <th>name</th>
+                                            <th>Actions</th>
                                         </tr>
+                                    </thead>
+                                    <tbody>
                                         <?php
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                        $sql = "SELECT * FROM `users`";
+                                        $result = mysqli_query($conn, $sql);
+                                        while ($row = mysqli_fetch_assoc($result)) {
+                                            ?>
+                                            <tr>
+                                                <td><?php echo $row["user_id"] ?></td>
+                                                <td><?php echo $row["email"] ?></td>
+                                                <td><?php echo $row["phoneNumber"] ?></td>
+                                                <td><?php echo $row["name"] ?></td>
+                                                <td>
+                                                    <a href="#" data-id="<?php echo $row["user_id"] ?>" data-toggle="modal"
+                                                        data-target="#userModal" class="view-user text-decoration-none">
+                                                        <i class="fa-solid fa-eye me-2"></i>
+                                                    </a>
+                                                    <a href="edit.php?user_id=<?php echo $row["user_id"] ?>"
+                                                        class="text-success text-decoration-none">
+                                                        <i class="fa-solid fa-pen-to-square me-2"></i>
+                                                    </a>
+                                                    <a href="delete.php?user_id=<?php echo $row["user_id"] ?>"
+                                                        class="text-danger text-decoration-none">
+                                                        <i class="fa-solid fa-trash me-2"></i>
+                                                    </a>
+                                                    <!-- <a href="?user_id=<?php // echo $row["user_id"] ?>"
+                                                        class="text-decoration-none" title="Recipes">
+                                                        <i class="fa-solid fa-eye me-2"></i>
+                                                    </a>
+                                                    <a href="?user_id=<?php // echo $row["user_id"] ?>"
+                                                        class="text-decoration-none" title="Allergies">
+                                                        <i class="fa-solid fa-eye me-2"></i>
+                                                    </a>
+                                                    <a href="?user_id=<?php // echo $row["user_id"] ?>"
+                                                        class="text-decoration-none" title="Dietary Restriction">
+                                                        <i class="fa-solid fa-eye "></i>
+                                                    </a> -->
+                                                </td>
+                                            </tr>
+                                            <?php
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -167,7 +181,9 @@ if (isset($_POST['user_id'])) {
             </div>
         </div>
     </div>
+
     <?php include "footer.php" ?>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.view-user').forEach(function (element) {

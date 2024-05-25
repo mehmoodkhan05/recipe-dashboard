@@ -4,6 +4,7 @@ header("Access-Control-Allow-Headers: *");
 
 include "navbar.php";
 include "db/connection.php";
+include "sidebar.php";
 
 // Define the API URL
 $api_url = 'https://edevz.com/recipe/get_my_recipes.php?user_id=1&limit=600&page=1';
@@ -49,11 +50,6 @@ curl_close($ch);
       margin-top: 100px;
     }
 
-    th,
-    tr {
-      padding: 0 -50px;
-    }
-
     .serving-text {
       padding: 10px 20px;
       background: lightcoral;
@@ -64,7 +60,6 @@ curl_close($ch);
 
 
 <body>
-  <?php include "sidebar.php"; ?>
   <div class="container">
     <div class="recipes-page">
       <h2 class="text-center">Recipes</h2>
@@ -125,7 +120,7 @@ curl_close($ch);
                           <td><?php echo substr($dateAndTime, 0, 10) ?></td>
                           <!-- <td><img src="<?php // echo htmlspecialchars($recipe['picture_url']); ?>" class="img-fluid" width></td> -->
                           <td>
-                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>">
+                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>" class="text-decoration-none">
                               <i class="fa-solid fa-eye me-5"></i>
                             </a>
                           </td>
