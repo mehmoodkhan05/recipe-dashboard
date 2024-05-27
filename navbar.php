@@ -18,12 +18,17 @@ session_start();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://unpkg.com/uicons@1.0.0/css/uicons.css">
+
   <!-- Custom style CSS -->
   <link rel="stylesheet" href="assets/css/custom.css">
   <!-- <link rel='shortcut icon' type='image/x-icon' href='assets/img/favicon.ico' /> -->
 
   <!-- DATA TABLES -->
+  <link rel="stylesheet" href="assets/DataTables/datatables.css">
+  <link rel="stylesheet" href="assets/DataTables/datatables.js">
   <link rel="stylesheet" href="assets/DataTables/datatables.min.css">
+  <link rel="stylesheet" href="assets/DataTables/datatables.min.js">
 
 </head>
 

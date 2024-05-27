@@ -50,14 +50,16 @@ if (isset($_POST["submit"])) {
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="mb-3">
                                         <label for="floatingName">Ingredient Name</label>
-                                        <input type="text" class="form-control" name="ingredient_name" value="<?php echo $row['ingredient_name'] ?>">
+                                        <input type="text" class="form-control" name="ingredient_name"
+                                            value="<?php echo $row['ingredient_name'] ?>">
                                     </div>
                                 </div>
 
                                 <div class="col-lg-4 col-sm-6">
                                     <div class="mb-3">
                                         <label for="floatingUnit">Pref Unit</label>
-                                        <input type="text" class="form-control" name="pref_unit" value="<?php echo $row['pref_unit'] ?>">
+                                        <input type="text" class="form-control" name="pref_unit"
+                                            value="<?php echo $row['pref_unit'] ?>">
                                     </div>
                                 </div>
                             </div>

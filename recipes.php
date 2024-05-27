@@ -44,6 +44,9 @@ curl_close($ch);
 ?>
 
 <head>
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.css" />
+
+  <script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script> -->
 
   <style>
     .recipes-page {
@@ -88,22 +91,22 @@ curl_close($ch);
                     </tr>
                   </thead>
                   <tbody>
-                    <?php if (!empty($error_message)) : ?>
+                    <?php if (!empty($error_message)): ?>
                       <tr>
                         <td colspan="4"><?php echo htmlspecialchars($error_message); ?></td>
                       </tr>
-                    <?php elseif (!empty($recipes) && is_array($recipes)) : ?>
+                    <?php elseif (!empty($recipes) && is_array($recipes)): ?>
                       <?php
-                        $itr = 1;
-                    
-                        ?>
-                      <?php foreach ($recipes as $recipe) : ?>
+                      $itr = 1;
+
+                      ?>
+                      <?php foreach ($recipes as $recipe): ?>
 
                         <?php
                         // $itr = 1;
-
-                        $dateAndTime = htmlspecialchars($recipe['timestamp']);
                     
+                        $dateAndTime = htmlspecialchars($recipe['timestamp']);
+
                         ?>
                         <tr>
                           <td><?php echo $itr++; ?></td>
@@ -120,13 +123,14 @@ curl_close($ch);
                           <td><?php echo substr($dateAndTime, 0, 10) ?></td>
                           <!-- <td><img src="<?php // echo htmlspecialchars($recipe['picture_url']); ?>" class="img-fluid" width></td> -->
                           <td>
-                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>" class="text-decoration-none" title="view">
+                            <a href="recipes-details.php?recipe_id=<?php echo $recipe['recipe_id'] ?>"
+                              class="text-decoration-none" title="view">
                               <i class="fa-solid fa-eye me-5"></i>
                             </a>
                           </td>
                         </tr>
                       <?php endforeach; ?>
-                    <?php else : ?>
+                    <?php else: ?>
                       <tr>
                         <td colspan="4">No recipes found.</td>
                       </tr>
@@ -141,9 +145,9 @@ curl_close($ch);
     </div>
   </div>
   <?php include "footer.php" ?>
-  
+
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       $('.table').DataTable({
         "pageLength": 10
       });
