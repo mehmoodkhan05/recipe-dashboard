@@ -38,7 +38,7 @@ include "sidebar.php";
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tb ody>
                                         <?php
                                         if (isset($_GET['user_id'])) {
                                             $userId = $_GET['user_id'];
@@ -72,7 +72,7 @@ include "sidebar.php";
                                             echo "<tr><td colspan='3'>No user ID specified.</td></tr>";
                                         }
                                         ?>
-                                    </tbody>
+                                    </tb>
                                 </table>
                             </div>
                         </div>

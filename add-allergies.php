@@ -81,7 +81,7 @@ if (isset($_POST["submit"])) {
                         </div>
                     </div>
 
-                    <div class="users_confirmation-buttons">
+                    <div class="allergies_confirmation-buttons">
                         <button type="submit" class="btn btn-success" name="submit">Add</button>
                         <a href="user-allergies.php?user_id=<?php echo $current_user_id; ?>" class="btn btn-danger ms-2">Cancel</a>
                     </div>

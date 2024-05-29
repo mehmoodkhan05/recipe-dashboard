@@ -18,9 +18,15 @@ include "sidebar.php";
             <h2 class="text-center">User Dietary Restriction</h2>
             <div class="row justify-content-lg-end justify-content-center">
                 <div class="col-lg-10">
-                    <a href="users.php" class="back_to-user text-decoration-none ms-1">
-                        <i class="fa-solid fa-arrow-left"></i>
-                    </a>
+                    <div class="top_header-links d-flex">
+                        <a href="users.php" class="back_to-dietary text-decoration-none ms-1 d-flex align-items-center">
+                            <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                        <div class="add_allergies-btn ms-auto">
+                            <a href="add-dietary-restriction.php?user_id=<?php echo $_GET['user_id']; ?>"
+                                class="btn btn-primary">Add Dietary Restriction</a>
+                        </div>
+                    </div>
                     <div class="card mt-4">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -29,6 +35,7 @@ include "sidebar.php";
                                         <tr>
                                             <th>id</th>
                                             <th>Dietary Restriction</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -43,6 +50,16 @@ include "sidebar.php";
                                             <tr>
                                                 <td><?php echo $row["user_id"] ?></td>
                                                 <td><?php echo $row["name"] ?></td>
+                                                <td>
+                                                    <a href="edit-dietary-restriction.php?user_id=<?php echo $userId; ?>&dietary_restrictions_id=<?php echo $row['dietary_restrictions_id']; ?>"
+                                                        class="text-success text-decoration-none" title="edit">
+                                                        <i class="fa-solid fa-pen-to-square me-2"></i>
+                                                    </a>
+                                                    <a href="delete-dietary-restriction.php?user_id=<?php echo $userId; ?>&dietary_restrictions_id=<?php echo $row['dietary_restrictions_id']; ?>"
+                                                        class="text-danger text-decoration-none" title="delete">
+                                                        <i class="fa-solid fa-trash me-1"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                             <?php
                                         }
