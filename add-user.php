@@ -20,44 +20,52 @@ if (isset($_POST["submit"])) {
    // Handle file upload
    $imagePath = null;
    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
-       $imageTmpPath = $_FILES['image']['tmp_name'];
-       $imageName = $_FILES['image']['name'];
-       $imageSize = $_FILES['image']['size'];
-       $imageType = $_FILES['image']['type'];
-       $imageExt = pathinfo($imageName, PATHINFO_EXTENSION);
-       $allowedExts = ['jpg', 'jpeg', 'png', 'gif'];
+      $imageTmpPath = $_FILES['image']['tmp_name'];
+      $imageName = $_FILES['image']['name'];
+      $imageSize = $_FILES['image']['size'];
+      $imageType = $_FILES['image']['type'];
+      $imageExt = pathinfo($imageName, PATHINFO_EXTENSION);
+      $allowedExts = ['jpg', 'jpeg', 'png', 'gif'];
 
-       if (in_array($imageExt, $allowedExts)) {
-           $uploadDir = 'assets/img/users/';
-           $imagePath = $uploadDir . basename($imageName);
-           if (!is_dir($uploadDir)) {
-               mkdir($uploadDir, 0777, true);
-           }
+      if (in_array($imageExt, $allowedExts)) {
+         $uploadDir = 'assets/img/users/';
+         $imagePath = $uploadDir . basename($imageName);
+         if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+         }
 
-           if (move_uploaded_file($imageTmpPath, $imagePath)) {
-               // File successfully uploaded
-           } else {
-               echo "Error uploading the file.";
-               $imagePath = null;
-           }
-       } else {
-           echo "Invalid file extension.";
-           $imagePath = null;
-       }
+         if (move_uploaded_file($imageTmpPath, $imagePath)) {
+            // File successfully uploaded
+         } else {
+            echo "Error uploading the file.";
+            $imagePath = null;
+         }
+      } else {
+         echo "Invalid file extension.";
+         $imagePath = null;
+      }
    }
 
-   $sql = "INSERT INTO `users`(`user_id`, `email`, `phoneNumber`, `locationLatitude`, `locationLongitude`, `name`, `type`, `token`, `description`, `coins`, `password`, `image`) 
-   VALUES 
-   (NULL,'$email','$phoneNumber','$locationLatitude','$locationLongitude','$name','$type','$token','$description', '$coins', '$hashedPassword', '$imagePath')";
+   // Prepare an SQL statement for execution
+   $stmt = $conn->prepare("INSERT INTO `users`(`email`, `phoneNumber`, `locationLatitude`, `locationLongitude`, `name`, `type`, `token`, `description`, `coins`, `password`, `image`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-   $result = mysqli_query($conn, $sql);
+   // Bind variables to the prepared statement as parameters
+   $stmt->bind_param("sssssssssss", $email, $phoneNumber, $locationLatitude, $locationLongitude, $name, $type, $token, $description, $coins, $hashedPassword, $imagePath);
 
-   if ($result) {
-      header("LOCATION: users.php");
+   // Attempt to execute the prepared statement
+   if ($stmt->execute()) {
+      header("Location: users.php");
+      exit();
    } else {
-      echo "Failed: " . mysqli_error($conn);
+      echo "Failed: " . $stmt->error;
    }
+
+   // Close statement
+   $stmt->close();
 }
+
+// Close connection
+$conn->close();
 ?>
 
 <style>

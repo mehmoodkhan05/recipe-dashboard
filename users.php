@@ -5,7 +5,7 @@ include "sidebar.php";
 
 if (isset($_POST['user_id'])) {
     $id = $_POST['user_id'];
-    $sql = "SELECT * FROM `users` WHERE `user_id` = $id";
+    $sql = "SELECT `user_id`, `email`, `phoneNumber`, `locationLatitude`, `locationLongitude`, `name`, `type`, `token`, `description`, `coins` FROM `users` WHERE `user_id` = $id";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
@@ -18,6 +18,9 @@ if (isset($_POST['user_id'])) {
 ?>
 
 <head>
+    <!-- Select2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         .main-panel {
             margin-top: 100px;
@@ -25,6 +28,14 @@ if (isset($_POST['user_id'])) {
 
         .modal-body img {
             width: 100px;
+        }
+
+        .select2 {
+            width: 250px !important;
+        }
+
+        .select2-selection__arrow {
+            display: none;
         }
     </style>
 </head>
@@ -35,8 +46,11 @@ if (isset($_POST['user_id'])) {
             <h2 class="text-center">Users</h2>
             <div class="row justify-content-lg-end justify-content-center">
                 <div class="col-lg-10">
-                    <div class="add_user-btn justify-content-end d-flex mb-3">
-                        <a href="add-user.php" class="btn btn-primary">Add User</a>
+                    <div class="top_header-links d-flex mb-3 align-items-center">
+                        <select name="user_id" id="search-user"></select>
+                        <div class="add_user-btn ms-auto">
+                            <a href="add-user.php" class="btn btn-primary">Add User</a>
+                        </div>
                     </div>
                     <div class="card">
                         <div class="card-body">
@@ -220,5 +234,67 @@ if (isset($_POST['user_id'])) {
                 });
             });
         });
+
+        $(document).ready(function () {
+            $('#search-user').select2({
+                ajax: {
+                    url: 'get-search.php',
+                    dataType: 'json',
+                    data: function (params) {
+                        var query = {
+                            search: params.term
+                        };
+                        return query;
+                    },
+                    processResults: function (data) {
+                        return {
+                            results: data.map(function (item) {
+                                return {
+                                    id: item.id,
+                                    text: item.text
+                                };
+                            })
+                        };
+                    }
+                },
+                cache: true,
+                placeholder: 'Search User...',
+                minimumInputLength: 1,
+            });
+
+            $('#search-user').on('select2:select', function (e) {
+                var data = e.params.data;
+                // Make an AJAX call to fetch user data
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'get-users.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                        var user = JSON.parse(xhr.responseText);
+
+                        if (!user.error) {
+                            // Populate the modal fields with user data
+                            document.getElementById('modalEmail').value = user.email;
+                            document.getElementById('modalPhone').value = user.phoneNumber;
+                            document.getElementById('modalLocationLatitude').value = user.locationLatitude || '';
+                            document.getElementById('modalLocationLongitude').value = user.locationLongitude || '';
+                            document.getElementById('modalName').value = user.name;
+                            document.getElementById('modalType').value = user.type || '';
+                            document.getElementById('modalToken').value = user.token || '';
+                            document.getElementById('modalDescriptions').value = user.description || '';
+                            document.getElementById('modalCoins').value = user.coins || '';
+
+                            // Set the src attribute of the image tag to the user's image URL
+                            document.getElementById('modalImage').src = user.image || 'assets/img/user.png';
+                        } else {
+                            alert('User not found');
+                        }
+                    }
+                };
+                xhr.send('user_id=' + data.id);
+            });
+        });
     </script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
