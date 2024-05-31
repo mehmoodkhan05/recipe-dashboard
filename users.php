@@ -115,9 +115,9 @@ if (isset($_POST['user_id'])) {
                                                         <!-- <i class="fas fa-allergies"></i> -->
                                                     </a>
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                     <p id="noUserMessage" class="text-center text-muted"></p>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             <?php
                                         }
@@ -212,4 +212,11 @@ if (isset($_POST['user_id'])) {
     <script src="assets/js/page/users.js"></script>
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.table').DataTable({
+                "pageLength": 10
+            });
+        });
+    </script>
 </body>
