@@ -71,6 +71,13 @@ curl_close($ch);
             <h2 class="text-center mb-4">Recipes Details</h2>
             <div class="recipe_img-view">
                 <div class="row justify-content-lg-end justify-content-center">
+                    <div class="col-10">
+                        <div class="top_header-links">
+                            <a href="recipes.php" class="back_to-user text-decoration-none ms-1">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </a>
+                        </div>
+                    </div>
                     <div class="col-lg-5 col-10 align-items-center d-flex mb-3 mb-lg-0">
                         <?php if (!empty($picture_urls)): ?>
                             <div id="recipeImageCarousel" class="carousel slide" data-ride="carousel">
@@ -113,7 +120,9 @@ curl_close($ch);
                                 <p>Serving Size: <?php echo htmlspecialchars($recipes['serving_size']); ?></p>
                             </div>
                             <div class="col-12">
-                                <p class="text-break">Source Link: <?php echo htmlspecialchars($recipes['source_link']); ?></p>
+                                <p class="text-break">Source Link:
+                                    <?php echo htmlspecialchars($recipes['source_link']); ?>
+                                </p>
                             </div>
                             <div class="col-6">
                                 <p>City: <?php echo htmlspecialchars($recipes['city']); ?></p>

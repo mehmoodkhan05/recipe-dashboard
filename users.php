@@ -37,6 +37,10 @@ if (isset($_POST['user_id'])) {
         .select2-selection__arrow {
             display: none;
         }
+
+        .input_container {
+            display: flex;
+        }
     </style>
 </head>
 
@@ -47,7 +51,18 @@ if (isset($_POST['user_id'])) {
             <div class="row justify-content-lg-end justify-content-center">
                 <div class="col-lg-10">
                     <div class="top_header-links d-flex mb-3 align-items-center">
-                        <select name="user_id" id="search-user"></select>
+                        <select name="search_field" id="mainSelect" class="select2">
+                            <option hidden value="">Select Field</option>
+                            <option value="email">Email</option>
+                            <option value="phoneNumber">Phone Number</option>
+                            <option value="locationLatitude">Location Latitude</option>
+                            <option value="locationLongitude">Location Longitude</option>
+                            <option value="name">Name</option>
+                            <option value="type">Type</option>
+                            <option value="token">Token</option>
+                            <option value="coins">Coins</option>
+                        </select>
+                        <div id="searchContainer" class="search-container"></div>
                         <div class="add_user-btn ms-auto">
                             <a href="add-user.php" class="btn btn-primary">Add User</a>
                         </div>
@@ -65,7 +80,7 @@ if (isset($_POST['user_id'])) {
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="userTableBody">
                                         <?php
                                         $sql = "SELECT * FROM `users`";
                                         $result = mysqli_query($conn, $sql);
@@ -100,6 +115,9 @@ if (isset($_POST['user_id'])) {
                                                         <!-- <i class="fas fa-allergies"></i> -->
                                                     </a>
                                                 </td>
+                                                <td>
+                                                    <p id="noUserMessage" class="text-center text-muted"></p>
+                                                </td>
                                             </tr>
                                             <?php
                                         }
@@ -124,8 +142,7 @@ if (isset($_POST['user_id'])) {
                 </div>
                 <div class="modal-body">
                     <div class="user_img text-center mb-4">
-                        <img src="assets/img/user.png" alt="" class="img-fluid rounded-circle" id="modalImage">
-                        <!-- <img src="" alt="" class="img-fluid rounded-circle"> -->
+                        <img src="assets/img/users/user-1.png" alt="" class="img-fluid rounded-circle" id="modalImage">
                     </div>
                     <form action="" method="">
                         <div class="row">
@@ -186,115 +203,13 @@ if (isset($_POST['user_id'])) {
                         </div>
                     </form>
                 </div>
-                <!-- <div class="modal-footer">
-                    <a href="#" class="btn btn-primary">Allergies</a>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div> -->
             </div>
         </div>
     </div>
 
     <?php include "footer.php" ?>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('.view-user').forEach(function (element) {
-                element.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    var userId = this.getAttribute('data-id');
-
-                    // Make an AJAX call to fetch user data
-                    var xhr = new XMLHttpRequest();
-                    xhr.open('POST', 'get-users.php', true);
-                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                    xhr.onreadystatechange = function () {
-                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                            var user = JSON.parse(xhr.responseText);
-
-                            if (!user.error) {
-                                // Populate the modal fields with user data
-                                document.getElementById('modalEmail').value = user.email;
-                                document.getElementById('modalPhone').value = user.phoneNumber;
-                                document.getElementById('modalLocationLatitude').value = user.locationLatitude || '';
-                                document.getElementById('modalLocationLongitude').value = user.locationLongitude || '';
-                                document.getElementById('modalName').value = user.name;
-                                document.getElementById('modalType').value = user.type || '';
-                                document.getElementById('modalToken').value = user.token || '';
-                                document.getElementById('modalDescriptions').value = user.description || '';
-                                document.getElementById('modalCoins').value = user.coins || '';
-
-                                // Set the src attribute of the image tag to the user's image URL
-                                document.getElementById('modalImage').src = user.image || 'assets/img/user.png';
-                            } else {
-                                alert('User not found');
-                            }
-                        }
-                    };
-                    xhr.send('user_id=' + userId);
-                });
-            });
-        });
-
-        $(document).ready(function () {
-            $('#search-user').select2({
-                ajax: {
-                    url: 'get-search.php',
-                    dataType: 'json',
-                    data: function (params) {
-                        var query = {
-                            search: params.term
-                        };
-                        return query;
-                    },
-                    processResults: function (data) {
-                        return {
-                            results: data.map(function (item) {
-                                return {
-                                    id: item.id,
-                                    text: item.text
-                                };
-                            })
-                        };
-                    }
-                },
-                cache: true,
-                placeholder: 'Search User...',
-                minimumInputLength: 1,
-            });
-
-            $('#search-user').on('select2:select', function (e) {
-                var data = e.params.data;
-                // Make an AJAX call to fetch user data
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'get-users.php', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        var user = JSON.parse(xhr.responseText);
-
-                        if (!user.error) {
-                            // Populate the modal fields with user data
-                            document.getElementById('modalEmail').value = user.email;
-                            document.getElementById('modalPhone').value = user.phoneNumber;
-                            document.getElementById('modalLocationLatitude').value = user.locationLatitude || '';
-                            document.getElementById('modalLocationLongitude').value = user.locationLongitude || '';
-                            document.getElementById('modalName').value = user.name;
-                            document.getElementById('modalType').value = user.type || '';
-                            document.getElementById('modalToken').value = user.token || '';
-                            document.getElementById('modalDescriptions').value = user.description || '';
-                            document.getElementById('modalCoins').value = user.coins || '';
-
-                            // Set the src attribute of the image tag to the user's image URL
-                            document.getElementById('modalImage').src = user.image || 'assets/img/user.png';
-                        } else {
-                            alert('User not found');
-                        }
-                    }
-                };
-                xhr.send('user_id=' + data.id);
-            });
-        });
-    </script>
+    <script src="assets/js/page/users.js"></script>
     <!-- Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </body>
