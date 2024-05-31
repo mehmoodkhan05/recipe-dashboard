@@ -41,6 +41,12 @@ if (isset($_POST['user_id'])) {
         .input_container {
             display: flex;
         }
+
+        .table.dataTable img {
+            box-shadow: none;
+            border: none;
+            margin-bottom: 3px;
+        }
     </style>
 </head>
 
@@ -106,13 +112,12 @@ if (isset($_POST['user_id'])) {
                                                         <i class="fa-solid fa-trash me-1"></i>
                                                     </a>
                                                     <a href="user-allergies.php?user_id=<?php echo $row["user_id"] ?>"
-                                                        class="text-decoration-none" title="Allergies">
+                                                        class="text-decoration-none me-1" title="Allergies">
                                                         <i class="fas fa-allergies"></i>
                                                     </a>
                                                     <a href="user-dietary-restriction.php?user_id=<?php echo $row["user_id"] ?>"
                                                         class="text-decoration-none" title="Dietary Restriction">
-                                                        Dietary Restriction
-                                                        <!-- <i class="fas fa-allergies"></i> -->
+                                                        <img src="assets/svg/diet.svg" alt="">
                                                     </a>
                                                 </td>
                                                 <!-- <td>

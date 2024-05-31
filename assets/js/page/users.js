@@ -100,13 +100,25 @@ function searchUsers(field) {
                                   <i class="fa-solid fa-trash me-1"></i>
                               </a>
                               <a href="user-allergies.php?user_id=${user.user_id}"
-                                  class="text-decoration-none" title="Allergies">
+                                  class="text-decoration-none me-1" title="Allergies">
                                   <i class="fas fa-allergies"></i>
                               </a>
                               <a href="user-dietary-restriction.php?user_id=${user.user_id}"
-                                  class="text-decoration-none" title="Dietary Restriction">
-                                  Dietary Restriction
+                                  class="text-decoration-none me-1" title="Dietary Restriction">
+                                  <img src="assets/svg/diet.svg" alt="ok">
                               </a>
+                              <a href="downloads/download-pdf.php?user_id=${user.user_id}"
+                                  class="text-decoration-none me-1" title="Download PDF">
+                                  <i class="fa-solid fa-file-pdf text-success"></i>
+                              </a>
+                              <a href="downloads/download-docx.php?user_id=${user.user_id}"
+                                  class="text-decoration-none me-1" title="Download DOCX">
+                                  <i class="fas fa-file-word text-success"></i>
+                              </a>
+                              <a href="downloads/download-excel.php?user_id=${user.user_id}"
+                                    class="text-decoration-none" title="Download Excel">
+                                    <i class="fas fa-file-excel text-success"></i>
+                                </a>
                           </td>
                       </tr>
                   `;
